@@ -10,7 +10,7 @@
     "drizzle:studio": "drizzle-kit studio",
     "db:migrate:local": "wrangler d1 migrations apply taakoapps --local",
     "db:migrate:remote": "wrangler d1 migrations apply taakoapps --remote",
-    "pages:build": "npx @cloudflare/next-on-pages",
+    "pages:build": "pnpm dlx @cloudflare/next-on-pages",
     "preview": "pnpm run pages:build && wrangler pages dev",
     "deploy": "pnpm run pages:build && wrangler pages deploy"
   },
