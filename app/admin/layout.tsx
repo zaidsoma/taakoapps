@@ -1,7 +1,11 @@
-import type React from "react"
-import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar"
-import { AdminSidebar } from "@/components/admin-sidebar"
-import { Separator } from "@/components/ui/separator"
+import type React from "react";
+import {
+  SidebarProvider,
+  SidebarInset,
+  SidebarTrigger,
+} from "@/components/ui/sidebar";
+import { AdminSidebar } from "@/components/admin-sidebar";
+import { Separator } from "@/components/ui/separator";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -9,12 +13,14 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
+} from "@/components/ui/breadcrumb";
+
+export const runtime = "edge";
 
 export default function AdminLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <SidebarProvider>
@@ -33,7 +39,9 @@ export default function AdminLayout({
                 </BreadcrumbItem>
                 <BreadcrumbSeparator className="hidden md:block" />
                 <BreadcrumbItem>
-                  <BreadcrumbPage className="truncate">Management</BreadcrumbPage>
+                  <BreadcrumbPage className="truncate">
+                    Management
+                  </BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
@@ -44,5 +52,5 @@ export default function AdminLayout({
         </div>
       </SidebarInset>
     </SidebarProvider>
-  )
+  );
 }

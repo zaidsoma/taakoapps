@@ -1,9 +1,9 @@
-import type React from "react"
-import type { Metadata } from "next"
-import { Inter } from "next/font/google"
-import "./globals.css"
+import type React from "react";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] })
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://apphub.com"),
@@ -13,7 +13,14 @@ export const metadata: Metadata = {
   },
   description:
     "Discover and download the best Android apps from our curated marketplace. Find games, productivity apps, social media, and more. Safe, fast downloads.",
-  keywords: ["android apps", "app download", "mobile apps", "free apps", "app marketplace", "android games"],
+  keywords: [
+    "android apps",
+    "app download",
+    "mobile apps",
+    "free apps",
+    "app marketplace",
+    "android games",
+  ],
   authors: [{ name: "AppHub Team" }],
   creator: "AppHub",
   publisher: "AppHub",
@@ -45,13 +52,15 @@ export const metadata: Metadata = {
   verification: {
     google: "your-google-verification-code",
   },
-    generator: 'v0.dev'
-}
+  generator: "v0.dev",
+};
+
+export const runtime = "edge";
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
@@ -65,7 +74,8 @@ export default function RootLayout({
               "@type": "WebSite",
               name: "AppHub",
               url: "https://apphub.com",
-              description: "Best Android app marketplace for downloading mobile applications",
+              description:
+                "Best Android app marketplace for downloading mobile applications",
               potentialAction: {
                 "@type": "SearchAction",
                 target: "https://apphub.com/search?q={search_term_string}",
@@ -77,5 +87,5 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>{children}</body>
     </html>
-  )
+  );
 }
