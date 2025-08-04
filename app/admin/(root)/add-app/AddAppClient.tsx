@@ -1,21 +1,33 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Badge } from "@/components/ui/badge"
-import { FileUploadDropdown } from "@/components/file-upload-dropdown"
-import { toast } from "sonner"
-import { Upload, LinkIcon, Plus, X } from "lucide-react"
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Badge } from "@/components/ui/badge";
+import { FileUploadDropdown } from "@/components/file-upload-dropdown";
+import { toast } from "sonner";
+import { Upload, LinkIcon, Plus, X } from "lucide-react";
 
-export default function AddAppPage() {
+export default function AddAppClient() {
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -24,61 +36,63 @@ export default function AddAppPage() {
     size: "",
     developer: "",
     tags: [] as string[],
-  })
-  const [currentTag, setCurrentTag] = useState("")
-  const [downloadMethod, setDownloadMethod] = useState<"url" | "upload">("url")
-  const [downloadUrl, setDownloadUrl] = useState("")
-  const [apkFile, setApkFile] = useState<File | null>(null)
+  });
+  const [currentTag, setCurrentTag] = useState("");
+  const [downloadMethod, setDownloadMethod] = useState<"url" | "upload">("url");
+  const [downloadUrl, setDownloadUrl] = useState("");
+  const [apkFile, setApkFile] = useState<File | null>(null);
 
   const handleInputChange = (field: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }))
-  }
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  };
 
   const addTag = () => {
     if (currentTag.trim() && !formData.tags.includes(currentTag.trim())) {
       setFormData((prev) => ({
         ...prev,
         tags: [...prev.tags, currentTag.trim()],
-      }))
-      setCurrentTag("")
+      }));
+      setCurrentTag("");
     }
-  }
+  };
 
   const removeTag = (tagToRemove: string) => {
     setFormData((prev) => ({
       ...prev,
       tags: prev.tags.filter((tag) => tag !== tagToRemove),
-    }))
-  }
+    }));
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
 
     // Validation
     if (!formData.name || !formData.description || !formData.category) {
-      toast.error("Please fill in all required fields")
-      return
+      toast.error("Please fill in all required fields");
+      return;
     }
 
     if (!downloadUrl && !apkFile) {
-      toast.error("Please provide either a download URL or upload an APK file")
-      return
+      toast.error("Please provide either a download URL or upload an APK file");
+      return;
     }
 
     // Here you would typically send the data to your API
-    console.log("Form data:", formData)
-    console.log("Download method:", downloadMethod)
-    console.log("Download URL:", downloadUrl)
-    console.log("APK file:", apkFile)
+    console.log("Form data:", formData);
+    console.log("Download method:", downloadMethod);
+    console.log("Download URL:", downloadUrl);
+    console.log("APK file:", apkFile);
 
-    toast.success("App added successfully!")
-  }
+    toast.success("App added successfully!");
+  };
 
   return (
     <div className="container mx-auto max-w-4xl space-y-6 overflow-x-hidden">
       <div className="flex flex-col space-y-2">
         <h1 className="text-3xl font-bold tracking-tight">Add New App</h1>
-        <p className="text-muted-foreground">Upload a new application to the marketplace</p>
+        <p className="text-muted-foreground">
+          Upload a new application to the marketplace
+        </p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
@@ -87,7 +101,9 @@ export default function AddAppPage() {
           <Card>
             <CardHeader>
               <CardTitle>Basic Information</CardTitle>
-              <CardDescription>Enter the basic details about the application</CardDescription>
+              <CardDescription>
+                Enter the basic details about the application
+              </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
@@ -107,7 +123,9 @@ export default function AddAppPage() {
                   id="developer"
                   placeholder="Enter developer name"
                   value={formData.developer}
-                  onChange={(e) => handleInputChange("developer", e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange("developer", e.target.value)
+                  }
                   required
                 />
               </div>
@@ -119,7 +137,9 @@ export default function AddAppPage() {
                     id="version"
                     placeholder="1.0.0"
                     value={formData.version}
-                    onChange={(e) => handleInputChange("version", e.target.value)}
+                    onChange={(e) =>
+                      handleInputChange("version", e.target.value)
+                    }
                   />
                 </div>
                 <div className="space-y-2">
@@ -135,7 +155,12 @@ export default function AddAppPage() {
 
               <div className="space-y-2">
                 <Label htmlFor="category">Category *</Label>
-                <Select value={formData.category} onValueChange={(value) => handleInputChange("category", value)}>
+                <Select
+                  value={formData.category}
+                  onValueChange={(value) =>
+                    handleInputChange("category", value)
+                  }
+                >
                   <SelectTrigger>
                     <SelectValue placeholder="Select category" />
                   </SelectTrigger>
@@ -158,7 +183,9 @@ export default function AddAppPage() {
           <Card>
             <CardHeader>
               <CardTitle>App Icon</CardTitle>
-              <CardDescription>Upload the application icon (recommended: 512x512px)</CardDescription>
+              <CardDescription>
+                Upload the application icon (recommended: 512x512px)
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <FileUploadDropdown
@@ -176,7 +203,9 @@ export default function AddAppPage() {
         <Card>
           <CardHeader>
             <CardTitle>Description</CardTitle>
-            <CardDescription>Provide a detailed description of the application</CardDescription>
+            <CardDescription>
+              Provide a detailed description of the application
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <Textarea
@@ -193,7 +222,9 @@ export default function AddAppPage() {
         <Card>
           <CardHeader>
             <CardTitle>Tags</CardTitle>
-            <CardDescription>Add relevant tags to help users discover your app</CardDescription>
+            <CardDescription>
+              Add relevant tags to help users discover your app
+            </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="flex gap-2">
@@ -201,7 +232,9 @@ export default function AddAppPage() {
                 placeholder="Enter tag"
                 value={currentTag}
                 onChange={(e) => setCurrentTag(e.target.value)}
-                onKeyPress={(e) => e.key === "Enter" && (e.preventDefault(), addTag())}
+                onKeyPress={(e) =>
+                  e.key === "Enter" && (e.preventDefault(), addTag())
+                }
                 className="flex-1"
               />
               <Button type="button" onClick={addTag} size="sm">
@@ -213,7 +246,11 @@ export default function AddAppPage() {
                 {formData.tags.map((tag) => (
                   <Badge key={tag} variant="secondary" className="gap-1">
                     {tag}
-                    <button type="button" onClick={() => removeTag(tag)} className="ml-1 hover:text-destructive">
+                    <button
+                      type="button"
+                      onClick={() => removeTag(tag)}
+                      className="ml-1 hover:text-destructive"
+                    >
                       <X className="h-3 w-3" />
                     </button>
                   </Badge>
@@ -227,10 +264,18 @@ export default function AddAppPage() {
         <Card>
           <CardHeader>
             <CardTitle>Download Method</CardTitle>
-            <CardDescription>Choose how users will download the app (at least one method required)</CardDescription>
+            <CardDescription>
+              Choose how users will download the app (at least one method
+              required)
+            </CardDescription>
           </CardHeader>
           <CardContent>
-            <Tabs value={downloadMethod} onValueChange={(value) => setDownloadMethod(value as "url" | "upload")}>
+            <Tabs
+              value={downloadMethod}
+              onValueChange={(value) =>
+                setDownloadMethod(value as "url" | "upload")
+              }
+            >
               <TabsList className="grid w-full grid-cols-2">
                 <TabsTrigger value="url" className="gap-2">
                   <LinkIcon className="h-4 w-4" />
@@ -251,7 +296,9 @@ export default function AddAppPage() {
                     value={downloadUrl}
                     onChange={(e) => setDownloadUrl(e.target.value)}
                   />
-                  <p className="text-xs text-muted-foreground">Enter the direct download link for the APK file</p>
+                  <p className="text-xs text-muted-foreground">
+                    Enter the direct download link for the APK file
+                  </p>
                 </div>
               </TabsContent>
 
@@ -276,5 +323,5 @@ export default function AddAppPage() {
         </div>
       </form>
     </div>
-  )
+  );
 }

@@ -1,18 +1,26 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { getApps } from "./actions"
-import Link from "next/link"
-import { PlusCircle, Package, Download, Eye } from "lucide-react"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { getApps } from "./actions";
+import Link from "next/link";
+import { PlusCircle, Package, Download, Eye } from "lucide-react";
 
 export default async function AdminDashboard() {
-  const apps = await getApps()
+  const apps = await getApps();
 
   return (
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold">Admin Dashboard</h1>
-        <p className="text-muted-foreground">Manage your Android app marketplace</p>
+        <p className="text-muted-foreground">
+          Manage your Android app marketplace
+        </p>
       </div>
 
       {/* Stats Cards */}
@@ -85,14 +93,18 @@ export default async function AdminDashboard() {
       <Card>
         <CardHeader>
           <CardTitle>Recent Apps</CardTitle>
-          <CardDescription>Latest applications added to the marketplace</CardDescription>
+          <CardDescription>
+            Latest applications added to the marketplace
+          </CardDescription>
         </CardHeader>
         <CardContent>
           {apps.length === 0 ? (
             <div className="text-center py-8">
               <Package className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
               <h3 className="text-lg font-semibold mb-2">No apps yet</h3>
-              <p className="text-muted-foreground mb-4">Start by adding your first Android application</p>
+              <p className="text-muted-foreground mb-4">
+                Start by adding your first Android application
+              </p>
               <Button asChild>
                 <Link href="/admin/add-app">
                   <PlusCircle className="h-4 w-4 mr-2" />
@@ -103,7 +115,10 @@ export default async function AdminDashboard() {
           ) : (
             <div className="space-y-4">
               {apps.slice(0, 5).map((app) => (
-                <div key={app.id} className="flex items-center justify-between p-4 border rounded-lg">
+                <div
+                  key={app.id}
+                  className="flex items-center justify-between p-4 border rounded-lg"
+                >
                   <div className="flex items-center gap-4">
                     <img
                       src={app.imageUrl || "/placeholder.svg"}
@@ -125,5 +140,5 @@ export default async function AdminDashboard() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }
