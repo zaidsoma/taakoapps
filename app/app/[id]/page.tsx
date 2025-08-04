@@ -1,15 +1,13 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import Image from "next/image";
-import Link from "next/link";
-import { ArrowLeft, Star, Download, Smartphone, Shield } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { DownloadButton } from "@/components/download-button";
-import { CommentsSection } from "@/components/comments-section";
-
-export const runtime = "edge";
+import type { Metadata } from "next"
+import { notFound } from "next/navigation"
+import Image from "next/image"
+import Link from "next/link"
+import { ArrowLeft, Star, Download, Smartphone, Shield } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { DownloadButton } from "@/components/download-button"
+import { CommentsSection } from "@/components/comments-section"
 
 // Mock app data - in a real app, this would come from a database
 const apps = {
@@ -193,26 +191,24 @@ const apps = {
       "Keeping up with friends is faster and easier than ever with the Facebook Lite app! Use Facebook Lite as a friends app to connect and keep up with your social network. The Facebook Lite app is small, allowing you to save space on your phone and use Facebook in 2G conditions. Many of the classic features of Facebook are available on the app, such as sharing to a Timeline, liking photos, searching for people, and editing your profile and groups. Specific features include: • Find friends and family • Post status updates & use Facebook emoji to help relay what's going on in your world • Share photos and your favorite memes • Get notifications when friends like and comment on your posts • Play games and use your favorite apps • Backup photos by saving them in albums • Follow your favorite artists, websites, and companies to get their latest news • Look up local businesses to see reviews, operation hours, and pictures • Buy and sell locally on Facebook Marketplace • Watch live videos on the go The Facebook Lite app is small. It lets you save space on your phone and use Facebook in 2G conditions without sacrificing the core features and functionality of Facebook. Install the Facebook Lite Android app now.",
     downloadUrl: "https://example.com/download/facebook.apk",
   },
-};
+}
 
 type Props = {
-  params: { id: string };
-};
+  params: { id: string }
+}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const app = apps[params.id as keyof typeof apps];
+  const app = apps[params.id as keyof typeof apps]
 
   if (!app) {
     return {
       title: "App Not Found - AppHub",
-    };
+    }
   }
 
   return {
     title: `${app.name} - Download for Android | AppHub`,
-    description: `Download ${app.name} by ${
-      app.developer
-    }. ${app.description.substring(0, 150)}...`,
+    description: `Download ${app.name} by ${app.developer}. ${app.description.substring(0, 150)}...`,
     keywords: `${app.name}, ${app.developer}, android app, download, ${app.category}`,
     openGraph: {
       title: `${app.name} - Download for Android`,
@@ -225,7 +221,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: `${app.name} - Download for Android`,
       description: app.description.substring(0, 200),
     },
-  };
+  }
 }
 
 // Function to get recommended apps based on category
@@ -239,8 +235,7 @@ function getRecommendedApps(category: string, currentAppId: string) {
       downloads: "5B+",
       category: "Communication",
       icon: "/placeholder.svg?height=80&width=80&text=WA",
-      description:
-        "Free messaging app for Android smartphones with voice and video calls.",
+      description: "Free messaging app for Android smartphones with voice and video calls.",
     },
     {
       id: "instagram",
@@ -250,8 +245,7 @@ function getRecommendedApps(category: string, currentAppId: string) {
       downloads: "2B+",
       category: "Social",
       icon: "/placeholder.svg?height=80&width=80&text=IG",
-      description:
-        "Share photos and videos with friends and discover content from around the world.",
+      description: "Share photos and videos with friends and discover content from around the world.",
     },
     {
       id: "tiktok",
@@ -261,8 +255,7 @@ function getRecommendedApps(category: string, currentAppId: string) {
       downloads: "1B+",
       category: "Entertainment",
       icon: "/placeholder.svg?height=80&width=80&text=TT",
-      description:
-        "Create and discover short videos with music, effects, and creative tools.",
+      description: "Create and discover short videos with music, effects, and creative tools.",
     },
     {
       id: "spotify",
@@ -272,8 +265,7 @@ function getRecommendedApps(category: string, currentAppId: string) {
       downloads: "1B+",
       category: "Music",
       icon: "/placeholder.svg?height=80&width=80&text=SP",
-      description:
-        "Stream millions of songs and podcasts with personalized playlists.",
+      description: "Stream millions of songs and podcasts with personalized playlists.",
     },
     {
       id: "telegram",
@@ -283,8 +275,7 @@ function getRecommendedApps(category: string, currentAppId: string) {
       downloads: "1B+",
       category: "Communication",
       icon: "/placeholder.svg?height=80&width=80&text=TG",
-      description:
-        "Fast and secure messaging app with cloud storage and group chats.",
+      description: "Fast and secure messaging app with cloud storage and group chats.",
     },
     {
       id: "netflix",
@@ -294,8 +285,7 @@ function getRecommendedApps(category: string, currentAppId: string) {
       downloads: "1B+",
       category: "Entertainment",
       icon: "/placeholder.svg?height=80&width=80&text=NF",
-      description:
-        "Watch TV shows and movies anytime, anywhere on your mobile device.",
+      description: "Watch TV shows and movies anytime, anywhere on your mobile device.",
     },
     {
       id: "discord",
@@ -305,8 +295,7 @@ function getRecommendedApps(category: string, currentAppId: string) {
       downloads: "500M+",
       category: "Communication",
       icon: "/placeholder.svg?height=80&width=80&text=DC",
-      description:
-        "Chat, voice call, and video call with friends and communities.",
+      description: "Chat, voice call, and video call with friends and communities.",
     },
     {
       id: "youtube",
@@ -316,8 +305,7 @@ function getRecommendedApps(category: string, currentAppId: string) {
       downloads: "10B+",
       category: "Entertainment",
       icon: "/placeholder.svg?height=80&width=80&text=YT",
-      description:
-        "Watch, upload, and share videos from creators around the world.",
+      description: "Watch, upload, and share videos from creators around the world.",
     },
     {
       id: "facebook",
@@ -329,34 +317,29 @@ function getRecommendedApps(category: string, currentAppId: string) {
       icon: "/placeholder.svg?height=80&width=80&text=FB",
       description: "Connect with friends and family, share updates and photos.",
     },
-  ];
+  ]
 
   // Filter apps by same category, excluding current app
-  const sameCategory = allAppsData.filter(
-    (app) => app.category === category && app.id !== currentAppId
-  );
+  const sameCategory = allAppsData.filter((app) => app.category === category && app.id !== currentAppId)
 
   // If we have enough apps in same category, return them
   if (sameCategory.length >= 4) {
-    return sameCategory.slice(0, 4);
+    return sameCategory.slice(0, 4)
   }
 
   // Otherwise, mix with other popular apps
-  const otherApps = allAppsData.filter((app) => app.id !== currentAppId);
-  return [
-    ...sameCategory,
-    ...otherApps.filter((app) => app.category !== category),
-  ].slice(0, 4);
+  const otherApps = allAppsData.filter((app) => app.id !== currentAppId)
+  return [...sameCategory, ...otherApps.filter((app) => app.category !== category)].slice(0, 4)
 }
 
 export default function AppPage({ params }: Props) {
-  const app = apps[params.id as keyof typeof apps];
+  const app = apps[params.id as keyof typeof apps]
 
   if (!app) {
-    notFound();
+    notFound()
   }
 
-  const recommendedApps = getRecommendedApps(app.category, app.id);
+  const recommendedApps = getRecommendedApps(app.category, app.id)
 
   return (
     <div className="min-h-screen bg-background">
@@ -399,31 +382,20 @@ export default function AppPage({ params }: Props) {
                   </div>
 
                   <div className="flex-1 text-center md:text-left">
-                    <h1 className="text-3xl md:text-4xl font-bold mb-3">
-                      {app.name}
-                    </h1>
-                    <Link
-                      href="#"
-                      className="text-primary hover:underline text-lg mb-4 inline-block"
-                    >
+                    <h1 className="text-3xl md:text-4xl font-bold mb-3">{app.name}</h1>
+                    <Link href="#" className="text-primary hover:underline text-lg mb-4 inline-block">
                       {app.developer}
                     </Link>
 
                     <div className="flex flex-wrap items-center justify-center md:justify-start gap-6 mb-6">
                       <div className="flex items-center">
                         <Star className="h-5 w-5 fill-yellow-400 text-yellow-400 mr-2" />
-                        <span className="font-semibold text-lg mr-2">
-                          {app.rating}
-                        </span>
-                        <span className="text-muted-foreground">
-                          ({app.totalRatings})
-                        </span>
+                        <span className="font-semibold text-lg mr-2">{app.rating}</span>
+                        <span className="text-muted-foreground">({app.totalRatings})</span>
                       </div>
                       <div className="flex items-center text-muted-foreground">
                         <Download className="h-5 w-5 mr-2" />
-                        <span className="font-medium">
-                          {app.downloads} downloads
-                        </span>
+                        <span className="font-medium">{app.downloads} downloads</span>
                       </div>
                       <Badge variant="secondary" className="text-sm px-3 py-1">
                         {app.category}
@@ -431,11 +403,7 @@ export default function AppPage({ params }: Props) {
                     </div>
 
                     <div className="hidden lg:flex flex-col sm:flex-row gap-4 items-center justify-center md:justify-start">
-                      <DownloadButton
-                        downloadUrl={app.downloadUrl}
-                        appName={app.name}
-                        appSize={app.size}
-                      />
+                      <DownloadButton downloadUrl={app.downloadUrl} appName={app.name} appSize={app.size} />
                       <div className="flex items-center text-sm text-muted-foreground">
                         <Shield className="h-4 w-4 mr-2" />
                         Safe & Secure Download
@@ -452,9 +420,7 @@ export default function AppPage({ params }: Props) {
                 <div className="text-gray-500">
                   <div className="text-sm mb-2">Advertisement</div>
                   <div className="bg-gray-100 h-24 flex items-center justify-center rounded">
-                    <span className="text-xs text-gray-400">
-                      728x90 Banner Ad Space
-                    </span>
+                    <span className="text-xs text-gray-400">728x90 Banner Ad Space</span>
                   </div>
                 </div>
               </CardContent>
@@ -465,9 +431,7 @@ export default function AppPage({ params }: Props) {
               <CardContent className="p-8">
                 <h2 className="text-2xl font-bold mb-6">About {app.name}</h2>
                 <div className="prose prose-gray max-w-none">
-                  <p className="text-muted-foreground leading-relaxed text-lg whitespace-pre-line">
-                    {app.description}
-                  </p>
+                  <p className="text-muted-foreground leading-relaxed text-lg whitespace-pre-line">{app.description}</p>
                 </div>
               </CardContent>
             </Card>
@@ -478,9 +442,7 @@ export default function AppPage({ params }: Props) {
                 <div className="text-gray-500">
                   <div className="text-sm mb-2">Advertisement</div>
                   <div className="bg-gray-100 h-32 flex items-center justify-center rounded">
-                    <span className="text-xs text-gray-400">
-                      Responsive Ad Space
-                    </span>
+                    <span className="text-xs text-gray-400">Responsive Ad Space</span>
                   </div>
                 </div>
               </CardContent>
@@ -498,9 +460,7 @@ export default function AppPage({ params }: Props) {
                 <div className="text-gray-500">
                   <div className="text-xs mb-2">Ad</div>
                   <div className="bg-gray-100 h-48 flex items-center justify-center rounded">
-                    <span className="text-xs text-gray-400">
-                      300x250 Sidebar Ad
-                    </span>
+                    <span className="text-xs text-gray-400">300x250 Sidebar Ad</span>
                   </div>
                 </div>
               </CardContent>
@@ -512,10 +472,7 @@ export default function AppPage({ params }: Props) {
                 <h3 className="text-lg font-bold mb-4">Recommended Apps</h3>
                 <div className="space-y-4">
                   {recommendedApps.map((recommendedApp) => (
-                    <Link
-                      key={recommendedApp.id}
-                      href={`/app/${recommendedApp.id}`}
-                    >
+                    <Link key={recommendedApp.id} href={`/app/${recommendedApp.id}`}>
                       <div className="flex items-start space-x-3 p-3 rounded-lg hover:bg-muted/50 transition-colors">
                         <Image
                           src={recommendedApp.icon || "/placeholder.svg"}
@@ -528,15 +485,11 @@ export default function AppPage({ params }: Props) {
                           <h4 className="font-semibold text-sm leading-tight line-clamp-2 mb-1">
                             {recommendedApp.name}
                           </h4>
-                          <p className="text-xs text-muted-foreground mb-2">
-                            {recommendedApp.developer}
-                          </p>
+                          <p className="text-xs text-muted-foreground mb-2">{recommendedApp.developer}</p>
                           <div className="flex items-center justify-between">
                             <div className="flex items-center">
                               <Star className="h-3 w-3 fill-yellow-400 text-yellow-400 mr-1" />
-                              <span className="text-xs font-medium">
-                                {recommendedApp.rating}
-                              </span>
+                              <span className="text-xs font-medium">{recommendedApp.rating}</span>
                             </div>
                             <Badge variant="outline" className="text-xs">
                               {recommendedApp.category}
@@ -556,9 +509,7 @@ export default function AppPage({ params }: Props) {
                 <div className="text-gray-500">
                   <div className="text-xs mb-2">Ad</div>
                   <div className="bg-gray-100 h-32 flex items-center justify-center rounded">
-                    <span className="text-xs text-gray-400">
-                      300x200 Sidebar Ad
-                    </span>
+                    <span className="text-xs text-gray-400">300x200 Sidebar Ad</span>
                   </div>
                 </div>
               </CardContent>
@@ -581,5 +532,5 @@ export default function AppPage({ params }: Props) {
         <div className="lg:hidden h-20"></div>
       </div>
     </div>
-  );
+  )
 }
