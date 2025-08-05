@@ -8,20 +8,11 @@
     "lint": "next lint",
     "start": "next start",
     "drizzle:studio": "drizzle-kit studio",
-    "db:migrate:local": "wrangler d1 migrations apply taakoapps --local",
-    "db:migrate:remote": "wrangler d1 migrations apply taakoapps",
-    "db:sync": "node scripts/sync-d1.js",
-    "db:generate": "drizzle-kit generate",
-    "pages:build": "npx @cloudflare/next-on-pages",
-    "preview": "npm run pages:build && wrangler pages dev",
-    "deploy": "npm run pages:build && wrangler pages deploy",
-    "migrate:local": "wrangler d1 migrations apply DB --local",
-    "migrate:prod": "wrangler d1 migrations apply DB --env production",
-    "list:prod": "wrangler d1 migrations list DB --env production"
+    "db:generate": "drizzle-kit generate"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
-    "@opennextjs/cloudflare": "^1.6.3",
+    "@neondatabase/serverless": "^1.0.1",
     "@radix-ui/react-accordion": "latest",
     "@radix-ui/react-alert-dialog": "latest",
     "@radix-ui/react-aspect-ratio": "latest",
@@ -51,7 +42,6 @@
     "@radix-ui/react-tooltip": "latest",
     "autoprefixer": "^10.4.20",
     "better-auth": "^1.3.4",
-    "better-sqlite3": "^12.2.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "latest",
@@ -77,19 +67,15 @@
     "zod": "3.25.67"
   },
   "devDependencies": {
-    "@cloudflare/next-on-pages": "^1.13.13",
-    "@cloudflare/workers-types": "^4.20250805.0",
     "@tailwindcss/postcss": "^4.1.9",
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "drizzle-kit": "^0.31.4",
-    "eslint-plugin-next-on-pages": "^1.13.13",
     "postcss": "^8.5",
     "tailwindcss": "^4.1.9",
     "tsx": "^4.20.3",
     "tw-animate-css": "1.3.3",
-    "typescript": "^5",
-    "wrangler": "^4.27.0"
+    "typescript": "^5"
   }
 }

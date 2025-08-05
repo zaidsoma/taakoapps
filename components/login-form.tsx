@@ -11,6 +11,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Form, FormField, FormItem, FormMessage } from "./ui/form";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -21,6 +22,7 @@ export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"form">) {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -32,31 +34,29 @@ export function LoginForm({
   });
 
   const handleSubmit = async (values: z.infer<typeof formSchema>) => {
-    setIsLoading(true);
-
-    const { data, error } = await authClient.signUp.email(
+    const { data, error } = await authClient.signIn.email(
       {
         email: values.email, // user email address
         password: values.password, // user password -> min 8 characters by default
-        name: "Abdirahman", // user display name
         callbackURL: "/admin", // A URL to redirect to after the user verifies their email (optional)
       },
       {
         onRequest: (ctx) => {
           //show loading
+          setIsLoading(true);
         },
         onSuccess: (ctx) => {
           //redirect to the dashboard or sign in page
+          router.push("/admin");
+          setIsLoading(false);
         },
         onError: (ctx) => {
           // display the error message
           alert(ctx.error.message);
+          setIsLoading(false);
         },
       }
     );
-
-    setIsLoading(false);
-    console.log(data, error);
   };
 
   return (

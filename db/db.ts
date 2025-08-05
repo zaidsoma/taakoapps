@@ -1,17 +1,7 @@
-import { drizzle } from "drizzle-orm/d1";
+import { neon } from "@neondatabase/serverless";
+import { drizzle } from "drizzle-orm/neon-http";
 import * as schema from "./schema";
-import { getRequestContext } from "@cloudflare/next-on-pages";
 
-export const runtime = "edge";
+const sql = neon(process.env.DATABASE_URL!);
 
-function initDbConnection() {
-  if (process.env.NODE_ENV === "development") {
-    const { env } = getRequestContext();
-
-    return drizzle(env.DB, { schema });
-  }
-
-  return drizzle(process.env.DB as unknown as D1Database, { schema });
-}
-
-export const db = initDbConnection();
+export const db = drizzle({ client: sql, schema: schema });
