@@ -14,7 +14,10 @@
     "db:generate": "drizzle-kit generate",
     "pages:build": "npx @cloudflare/next-on-pages",
     "preview": "npm run pages:build && wrangler pages dev",
-    "deploy": "npm run pages:build && wrangler pages deploy"
+    "deploy": "npm run pages:build && wrangler pages deploy",
+    "migrate:local": "wrangler d1 migrations apply DB --local",
+    "migrate:prod": "wrangler d1 migrations apply DB --env production",
+    "list:prod": "wrangler d1 migrations list DB --env production"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
