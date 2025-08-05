@@ -9,7 +9,9 @@
     "start": "next start",
     "drizzle:studio": "drizzle-kit studio",
     "db:migrate:local": "wrangler d1 migrations apply taakoapps --local",
-    "db:migrate:remote": "wrangler d1 migrations apply taakoapps --remote",
+    "db:migrate:remote": "wrangler d1 migrations apply taakoapps",
+    "db:sync": "node scripts/sync-d1.js",
+    "db:generate": "drizzle-kit generate",
     "pages:build": "npx @cloudflare/next-on-pages",
     "preview": "npm run pages:build && wrangler pages dev",
     "deploy": "npm run pages:build && wrangler pages deploy"
@@ -46,6 +48,7 @@
     "@radix-ui/react-tooltip": "latest",
     "autoprefixer": "^10.4.20",
     "better-auth": "^1.3.4",
+    "better-sqlite3": "^12.2.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "latest",

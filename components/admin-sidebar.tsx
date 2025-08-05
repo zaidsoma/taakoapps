@@ -36,12 +36,20 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { authClient } from "@/lib/auth-client";
 
 export function AdminSidebar({
   ...props
 }: React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname();
   const router = useRouter();
+
+  const {
+    data: session,
+    isPending, //loading state
+    error, //error object
+    refetch, //refetch the session
+  } = authClient.useSession();
 
   const navItems = [
     {
@@ -66,8 +74,8 @@ export function AdminSidebar({
 
   const handleLogout = async () => {
     // Add your logout logic here
-    console.log("Logging out...");
-    router.push("/admin/login");
+    await authClient.signOut();
+    router.push("/admin/auth/sign-in");
   };
 
   return (
@@ -174,9 +182,11 @@ export function AdminSidebar({
                     </AvatarFallback>
                   </Avatar>
                   <div className="grid flex-1 text-left text-sm leading-tight min-w-0">
-                    <span className="truncate font-semibold">Admin User</span>
+                    <span className="truncate font-semibold">
+                      {session?.user?.name}
+                    </span>
                     <span className="truncate text-xs text-muted-foreground">
-                      admin@marketplace.com
+                      {session?.user?.email}
                     </span>
                   </div>
                   <ChevronDown className="ml-auto size-4 shrink-0" />

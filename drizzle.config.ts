@@ -2,6 +2,7 @@ import "dotenv/config";
 import { defineConfig } from "drizzle-kit";
 import path from "path";
 import fs from "node:fs";
+
 function GetLocalD1DB() {
   try {
     const basePath = path.resolve(".wrangler");
@@ -12,8 +13,10 @@ function GetLocalD1DB() {
     if (!dbFile) {
       throw new Error(`.sqlite file not found in ${basePath}`);
     }
-    const url = path.resolve(basePath, dbFile);
+    const filePath = path.resolve(basePath, dbFile);
 
+    // Convert Windows path to proper file:// URL format
+    const url = `file:${filePath.replace(/\\/g, "/")}`;
     return url;
   } catch (error) {
     console.error(error);
@@ -21,17 +24,32 @@ function GetLocalD1DB() {
   }
 }
 
+// Check if we have the required environment variables for remote D1
+function hasRemoteD1Config() {
+  return (
+    process.env.CLOUDFLARE_D1_ACCOUNT_ID &&
+    process.env.DATABASE_ID &&
+    process.env.CLOUDFLARE_D1_API_TOKEN
+  );
+}
+
 export default defineConfig({
   out: "./drizzle",
   schema: "./db/schema.ts",
   dialect: "sqlite",
-  ...(process.env.NODE_ENV === "production"
+  // driver: "d1-http",
+  // dbCredentials: {
+  //   accountId: process.env.CLOUDFLARE_D1_ACCOUNT_ID!,
+  //   databaseId: process.env.DATABASE_ID!,
+  //   token: process.env.CLOUDFLARE_D1_API_TOKEN!,
+  // },
+  ...(process.env.NODE_ENV === "production" && hasRemoteD1Config()
     ? {
         driver: "d1-http",
         dbCredentials: {
-          accountId: process.env.CLOUDFLARE_ACCOUNT_ID!,
-          databaseId: process.env.CLOUDFLARE_DATABASE_ID!,
-          token: process.env.CLOUDFLARE_D1_TOKEN!,
+          accountId: process.env.CLOUDFLARE_D1_ACCOUNT_ID!,
+          databaseId: process.env.DATABASE_ID!,
+          token: process.env.CLOUDFLARE_D1_API_TOKEN!,
         },
       }
     : {
